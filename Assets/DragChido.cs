@@ -9,7 +9,11 @@ public class DraggableCube : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
             offset = transform.position - GetMouseWorldPos();
         if(Input.GetMouseButtonDown(1))
-            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + 15, 0);
+            if( Input.GetKey( KeyCode.LeftShift ) ){
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y - 15, 0);
+            }else{
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + 15, 0);
+            }
     }
 
     void OnMouseDrag(){
