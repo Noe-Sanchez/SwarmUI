@@ -827,7 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droneTemplate: {fileID: 2051485645}
   centroid: {fileID: 1404038798}
-  numDrones: 8
+  numDrones: 4
   openSocket: 0
 --- !u!1 &2051485645
 GameObject:
