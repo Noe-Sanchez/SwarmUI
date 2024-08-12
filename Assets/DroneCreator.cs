@@ -82,9 +82,12 @@ public class DroneCreator : MonoBehaviour
 
     void Update(){
 
+        centroid.transform.Rotate(0, 0.1f, 0);
+
         for (int i = 0; i < numDrones; i++){
             lines[i].SetPosition(0, centroid.transform.GetChild(i).transform.position); 
             lines[i].SetPosition(1, centroid.transform.position);
+            centroid.transform.GetChild(i).transform.Rotate(0, -0.1f, 0);
         }
         lines[numDrones].SetPosition(1, centroid.transform.position);
 

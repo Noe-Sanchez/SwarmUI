@@ -828,7 +828,7 @@ MonoBehaviour:
   droneTemplate: {fileID: 2051485645}
   centroid: {fileID: 1404038798}
   numDrones: 8
-  openSocket: 0
+  openSocket: 1
 --- !u!1 &2051485645
 GameObject:
   m_ObjectHideFlags: 0
