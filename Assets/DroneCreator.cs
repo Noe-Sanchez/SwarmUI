@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Net.Sockets;
 using System.Linq;
+using System.Collections.Generic;
 
 public class DroneCreator : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class DroneCreator : MonoBehaviour
 
     private TcpClient socket;
     private float hz_counter = 0;
+
+    private List<LineRenderer> lines = new List<LineRenderer>();
     
     private byte[] posData;
     void Start(){
@@ -34,7 +37,36 @@ public class DroneCreator : MonoBehaviour
             // Set to dronePos times the local scale of the drone
             newDrone.transform.localPosition = dronePos * newDrone.transform.localScale.x / centroid.transform.localScale.x; 
             //newDrone.transform.GetChild(1).GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);
+            //Make new line renderer
+            LineRenderer line = newDrone.AddComponent<LineRenderer>();
+            line.startWidth = 0.04f;
+            line.endWidth = 0.04f;
+            line.positionCount = 2;
+            line.SetPosition(0, newDrone.transform.position);
+            line.SetPosition(1, centroid.transform.position);
+
+            line.material = new Material(Shader.Find("Sprites/Default"));
+            line.material.color = new Color(1, 1, 1, 0.25f);
+
+            line.startColor = new Color((float)i/numDrones, 1, 1 - (float)i/numDrones);
+            line.endColor = new Color(1, 1, 1); 
+            line.numCapVertices = 5;
+            lines.Add(line);
         }
+        LineRenderer _line = centroid.AddComponent<LineRenderer>(); 
+        _line.startWidth = 0.04f;
+        _line.endWidth = 0.04f;
+        _line.positionCount = 2;
+        _line.SetPosition(0, new Vector3(0,0,0)); 
+        _line.SetPosition(1, centroid.transform.position);
+        
+        _line.material = new Material(Shader.Find("Sprites/Default"));
+        _line.material.color = new Color(1, 1, 1, 0.25f);
+        
+        _line.startColor = new Color(1, 1, 1);
+        _line.endColor = new Color(1, 1, 1); 
+        _line.numCapVertices = 5;
+        lines.Add(_line);
 
         Destroy(droneTemplate);
 
@@ -49,6 +81,13 @@ public class DroneCreator : MonoBehaviour
     } 
 
     void Update(){
+
+        for (int i = 0; i < numDrones; i++){
+            lines[i].SetPosition(0, centroid.transform.GetChild(i).transform.position); 
+            lines[i].SetPosition(1, centroid.transform.position);
+        }
+        lines[numDrones].SetPosition(1, centroid.transform.position);
+
         if (openSocket){
             
             // Use delta time
