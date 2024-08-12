@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a7d560865a5ecdeb15e99e536551f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
+  acceleration: 25
   accSprintMultiplier: 4
   lookSensitivity: 1
   dampingCoefficient: 5
@@ -827,8 +827,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droneTemplate: {fileID: 2051485645}
   centroid: {fileID: 1404038798}
-  numDrones: 4
-  openSocket: 0
+  numDrones: 2
+  openSocket: 1
 --- !u!1 &2051485645
 GameObject:
   m_ObjectHideFlags: 0
